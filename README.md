@@ -1,3 +1,3 @@
 # Java_Studies
 
-Java oriented object programing basic studies
+Initial studies program folder
