@@ -2,6 +2,7 @@ package application;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Main {
@@ -32,6 +33,21 @@ public class Main {
 		Stream<Long> st4 = Stream.iterate(new long[]{ 0L, 1L }, p->new long[]{ p[1], p[0]+p[1] }).map(p -> p[0]);
 		//imprime os 10 primeiros numeros da sequencia
 		System.out.println(Arrays.toString(st4.limit(10).toArray()));
+		
+		//multiplica todos os elementos da lista por 10
+		Stream<Integer> st5 = list.stream().map(x -> x * 10);
+		System.out.println(Arrays.toString(st5.toArray()));
+		
+		//somatorio, x = 0, x = x + y; onde x eh a variavel sum e y eh cada um dos valores da stream
+		int sum = list.stream().reduce(0, (x, y) -> x + y);
+		System.out.println("Sum = " + sum);
+		
+		List<Integer> newList = list.stream() //newList = list.stream resultado do pipeline
+			.filter(x -> x % 2 == 0) // filtra apenas numeros pares -> 4, 10
+			.map(x -> x * 10) //gera uma nova stream multiplicando todos os elemntos por 10 -> 40, 100
+			.collect(Collectors.toList()); // transforma em uma lista
+		//imprime lista final no formato array de strings
+		System.out.println(Arrays.toString(newList.toArray()));
 		
 	}
 
